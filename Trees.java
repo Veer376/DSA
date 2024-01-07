@@ -33,10 +33,18 @@ public class Trees {
         int countright=sumNodes(head.right);
         return countleft+countright+head.data;
     }
+    static int heightOfTree(Node head){
+        if(head==null) return 0;
+        int trigger_left=heightOfTree(head.left);
+        int trigger_right=heightOfTree(head.right);
+
+        return trigger_right>trigger_left?trigger_right+1:trigger_left+1;
+    }
     public static void main(String[] args) {
-        int nodes[]={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+        int nodes[]={1,2,4,-1,-1,5,-1,-1,3,-1,6,9,-1,-1,-1};
         Node head=BuildTree.buildTree(nodes);
         System.out.println(sumNodes(head));
+        System.out.println(heightOfTree(head));
 
     }
 }
