@@ -27,10 +27,16 @@ public class Trees {
         int countright=countNodes(head.right);
         return countleft+countright+1;
     }
+    static int sumNodes(Node head){
+        if(head==null) return 0;
+        int countleft=sumNodes(head.left);
+        int countright=sumNodes(head.right);
+        return countleft+countright+head.data;
+    }
     public static void main(String[] args) {
         int nodes[]={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
         Node head=BuildTree.buildTree(nodes);
-        System.out.println(countNodes(head));
+        System.out.println(sumNodes(head));
 
     }
 }
