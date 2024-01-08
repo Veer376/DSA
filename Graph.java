@@ -3,7 +3,7 @@ public class Graph {
     static class Edge{
         int destination;
         int source;
-        Edge(int destination, int source){
+        Edge(int source, int destination){
             this.destination=destination;
             this.source=source;
         }
@@ -38,7 +38,7 @@ public class Graph {
 
 
     }
-    static void BFS(ArrayList<Edge>[] graph, boolean visited[],int start){
+    static void BFS(ArrayList<Edge>[] graph, boolean[] visited, int start){
         Queue<Integer> queue=new LinkedList<>();
         queue.add(start);
         while(!queue.isEmpty()){
@@ -52,14 +52,25 @@ public class Graph {
             }
         }
     }
+    static void DFS(ArrayList<Edge>[] graph, boolean[] visited, int start){
+        System.out.print(start+ " ");
+        visited[start]=true;
+        for(Edge e: graph[start]){
+            if(!visited[e.destination]) {
+                DFS(graph,visited,e.destination);
+            }
+        }
+
+    }
 
     public static void main(String[] args) {
         ArrayList[] graph=new ArrayList[7];
         buildGraph(graph);
         boolean[] visited=new boolean[graph.length];
         for(int i=0;i<visited.length;i++){
-            if(!visited[i]) BFS(graph,visited,i);
+            if(!visited[i]) DFS(graph,visited,i);
         }
+
     }
 
 }
