@@ -60,16 +60,29 @@ public class Graph {
                 DFS(graph,visited,e.destination);
             }
         }
-
     }
-
+    static void allPaths(ArrayList<Edge>[] graph, boolean[] visited, int current, int destination,String path){
+        if(current==destination) {
+            System.out.println(path);
+            return;
+        }
+        for(Edge e: graph[current]){
+            if(!visited[current]) {
+                visited[current] = true;
+                allPaths(graph, visited, e.destination, destination, path + e.destination);
+                visited[current] = false;
+            }
+        }
+    }
     public static void main(String[] args) {
         ArrayList[] graph=new ArrayList[7];
         buildGraph(graph);
         boolean[] visited=new boolean[graph.length];
-        for(int i=0;i<visited.length;i++){
-            if(!visited[i]) DFS(graph,visited,i);
-        }
+//        for(int i=0;i<visited.length;i++){
+//            if(!visited[i]) DFS(graph,visited,i);
+//        }
+        allPaths(graph,visited,0,5,"0" );
+
 
     }
 
